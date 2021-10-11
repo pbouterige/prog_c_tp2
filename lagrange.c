@@ -4,12 +4,12 @@
 #include "fonction.c"
 #endif
 
-double* li(Liste* L, int i) {
+long  double* li(Liste* L, int i) {
     element* e = L->head;
     for (int j = 1; j < i; j++) e = e->next_;
-    double xi = e->xi;
+    long  double xi = e->xi;
     int l = (LongueurListe(L));
-    double* tab = (double*)malloc((l) * sizeof(double));
+    long  double* tab = (long  double*)malloc((l) * sizeof(long  double));
     for (int j = 0; j < l; j++) tab[j] = 0;
     Liste* coefAB = ClisteVide();
     RemplirL(coefAB, (l - 1));
@@ -17,7 +17,7 @@ double* li(Liste* L, int i) {
     element* e2 = L->head;
     for (int j = 1; j <= l; j++) {
         if (i != j) {
-            e1->xi = ((double)1 / (xi - e2->xi));
+            e1->xi = ((long  double)1 / (xi - e2->xi));
             e1->yi = (-e2->xi / (xi - e2->xi));
             e1 = e1->next_;
             e2 = e2->next_;
@@ -29,15 +29,15 @@ double* li(Liste* L, int i) {
     return tab;
 }
 
-double* lagrange(Liste* L) {
+long  double* lagrange(Liste* L) {
     int l = (LongueurListe(L));
     element* e = L->head;
-    double* polynome = (double*)malloc(l * sizeof(double));
+    long  double* polynome = (long  double*)malloc(l * sizeof(long  double));
     for (int i = 0; i < l; i++) {
         if (e->yi == 0)
             e = e->next_;
         else {
-            double* l_i = li(L, i + 1);
+            long  double* l_i = li(L, i + 1);
             for (int j = 0; j < l; j++) polynome[j] += e->yi * l_i[j];
             free(l_i);
             e = e->next_;
@@ -48,18 +48,25 @@ double* lagrange(Liste* L) {
 
 int main() {
     srand(time(NULL));
-    Liste* test = ClisteVide();
-    AElement(test, 0, 1);
-    AElement(test, 2, 3);
-    AElement(test, 3, 6);
-    AElement(test, 4, 8);
-    AElement(test, 5, 9);
+    Liste* test = densiteEauTemp();
     afficheListe(test);
-    double* resultat = lagrange(test);
-    printf("%fx%d", resultat[test->nb_elements_ - 1], test->nb_elements_ - 1);
-    for (int i = test->nb_elements_ - 2; i >= 0; i--)
-        printf(" + %fx%d", resultat[i], i);
     puts("");
+    long  double* resultat = lagrange(test);
+    printf("%Lfx%d", resultat[test->nb_elements_ - 1], test->nb_elements_ - 1);
+    for (int i = test->nb_elements_ - 2; i >= 0; i--)
+        printf(" + %Lfx%d", resultat[i], i);
+    puts("\n");
+    long  double somme = 0 ;
+    element* e = test->head;
+    for (int i = 0 ; i<test->nb_elements_ ;i++){
+        int a = e->xi;
+        for (int j = 0 ; j < test->nb_elements_ ;j++)
+            somme += resultat[j]*powf(a,j);
+        printf("f(%d) = %Lg et Yi = %Lg\n",a,somme,e->yi);
+        somme = 0;
+        e = e->next_;
+    }
+
     free(resultat);
     freeListe(test);
     return 0;

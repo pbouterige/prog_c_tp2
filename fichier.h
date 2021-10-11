@@ -8,8 +8,8 @@
 #include <time.h>
 
 typedef struct element{
-    double xi;
-    double yi;
+    long  double xi;
+    long  double yi;
     struct element* next_;
     struct element* prev_;
 }element;
