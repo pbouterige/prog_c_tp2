@@ -1,4 +1,4 @@
-#include  "fichier.h"
+#include "fichier.h"
 
 Liste* ClisteVide() {
     Liste* L = (Liste*)malloc(sizeof(Liste));
@@ -32,56 +32,65 @@ void AElement(Liste* L, double xi, double yi) {
     }
 }
 
-void RemplirL(Liste* L, int nb){
-    for (int i = 0 ; i<nb ; i++)
-        AElement(L,0,0);
+void RemplirL(Liste* L, int nb) {
+    for (int i = 0; i < nb; i++) AElement(L, 0, 0);
 }
-
 
 void afficheListe(Liste* L) {
     element* iterateur = L->head;
     printf("[xi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
-        if (iterateur->xi >= 0) printf("[  %0.3f ]", iterateur->xi);
-        else printf("[ %0.3f ]", iterateur->xi);
+        if (iterateur->xi >= 0)
+            printf("[  %g ]", iterateur->xi);
+        else
+            printf("[ %g ]", iterateur->xi);
         iterateur = iterateur->next_;
     }
     puts("");
     iterateur = L->head;
-    printf("[yi] "); 
+    printf("[yi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
-        if (iterateur->yi >= 0) printf("[  %0.3f ]", iterateur->yi);
-        else printf("[ %0.3f ]", iterateur->yi);
+        if (iterateur->yi >= 0)
+            printf("[  %g ]", iterateur->yi);
+        else
+            printf("[ %g ]", iterateur->yi);
         iterateur = iterateur->next_;
     }
     puts("");
 }
 
-void devpoly(double* tab, Liste* L, int l){
+void devpoly(double* tab, Liste* L, int l) {
     tab[0] = L->head->yi;
     tab[1] = L->head->xi;
-    element * e = L->head;
-    for (int j = 0 ; j<l-2 ; j++){
+    element* e = L->head;
+    for (int j = 0; j < l - 2; j++) {
         e = e->next_;
-        double* stocke = (double*)malloc((l)*sizeof(double));
-        for (int i = 1 ; i<l ;i++)
-           stocke[i] = tab[i-1] * e->xi;
-        for (int i = 0 ; i<l-1 ;i++)
-            stocke[i] += tab[i]* e->yi;
-        for (int i = 0 ; i<l ;i++)
-           tab[i] = stocke[i];
+        double* stocke = (double*)malloc((l) * sizeof(double));
+        for (int i = 1; i < l; i++) stocke[i] = tab[i - 1] * e->xi;
+        for (int i = 0; i < l - 1; i++) stocke[i] += tab[i] * e->yi;
+        for (int i = 0; i < l; i++) tab[i] = stocke[i];
         free(stocke);
     }
 }
 
-void freeListe(Liste * L){
+void freeListe(Liste* L) {
     element* e1 = L->head;
     element* e2 = L->head->next_;
-    for (int i = 0 ; i<L->nb_elements_-1 ; i++){
+    for (int i = 0; i < L->nb_elements_ - 1; i++) {
         free(e1);
         e1 = e2;
         e2 = e2->next_;
     }
     free(e1);
     free(L);
+}
+
+Liste* densiteEauTemp(void) {
+    Liste* tab = ClisteVide(20);
+    double tmp[20] = {0.99987, 0.99997,  1.00000, 0.99997, 0.99988,
+                      0.99973, 0.99953,  0.99927, 0.99897, 0.99846,
+                      0.99805, 0.999751, 0.99705, 0.99650, 0.99664,
+                      0.99533, 0.99472,  0.99472, 0.99333, 0.99326};
+    for (int i = 0; i < 20; i++) AElement(tab, 2 * i, tmp[i]);
+    return tab;
 }
