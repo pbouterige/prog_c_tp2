@@ -86,7 +86,7 @@ void freeListe(Liste* L) {
 }
 
 Liste* densiteEauTemp(void) {
-    Liste* tab = ClisteVide(20);
+    Liste* tab = ClisteVide();
     long  double tmp[20] = {0.99987, 0.99997,  1.00000, 0.99997, 0.99988,
                       0.99973, 0.99953,  0.99927, 0.99897, 0.99846,
                       0.99805, 0.999751, 0.99705, 0.99650, 0.99664,
