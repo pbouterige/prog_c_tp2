@@ -60,19 +60,11 @@ int main(){
     //double xi[6] = {-2.0, 1.0, 4.0, -1.0, 3.0, -4.0};
     //double yi[6] = {-1.0, 2.0, 59.0, 4.0, 24.0, -53.0};
 
-    int N = 11;
+    int N = 21;
     double xi[N];
     double yi[N];
 
-    S1(xi, yi);
-    newton(xi, yi, N);
-    printf("\n");
-
-    S2(xi, yi);
-    newton(xi, yi, N);
-    printf("\n");
-
-    S3(xi, yi);
+    depenses(xi, yi);
     newton(xi, yi, N);
 
 }

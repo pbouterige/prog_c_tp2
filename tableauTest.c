@@ -63,13 +63,3 @@ void AfficheTab(double tab[], int N){
     } 
     printf("\n");
 }
-
-int main(){
-    int N = 21;
-    double tabX[N]; 
-    double tabY[N];
-
-    depenses(tabX, tabY);
-    AfficheTab(tabX, N);
-    AfficheTab(tabY, N); 
-} 
