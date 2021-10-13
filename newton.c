@@ -1,5 +1,5 @@
 #include "fichier.h"
-#include "fonction.c"
+#include "tableauTest.c"
 
 double deltaInvers(double tabX[], double tabY[], int i, int k){
     if (k==1)
@@ -20,7 +20,7 @@ void Bi(double tabB[], double tabX[], double tabY[], int N){
 
 } 
 
-void polynome(double degre[], double tabX[], double tabY[], double tabB[], int N){
+void polynome(double degre[], double tabX[], double tabB[], int N){
     //initialisation tableau degre
     degre[0]=tabB[N-1];
     for (int j = 1; j < N; j++)
@@ -44,7 +44,7 @@ void newton(double xi[], double yi[], int N){
     Bi(tabB, xi, yi, N);
     //tableau degre
     double degre[N];
-    polynome(degre, xi, yi, tabB, N); 
+    polynome(degre, xi, tabB, N); 
 
     printf("Le polynôme de Newton s'écrit ici sous la forme : ");
     for (int j = N-1; j > 0; j--)
@@ -57,11 +57,22 @@ void newton(double xi[], double yi[], int N){
 
 int main(){
     
-    double xi[6] = {-2.0, 1.0, 4.0, -1.0, 3.0, -4.0};
-    double yi[6] = {-1.0, 2.0, 59.0, 4.0, 24.0, -53.0};
+    //double xi[6] = {-2.0, 1.0, 4.0, -1.0, 3.0, -4.0};
+    //double yi[6] = {-1.0, 2.0, 59.0, 4.0, 24.0, -53.0};
 
-    int N = 6;
+    int N = 11;
+    double xi[N];
+    double yi[N];
 
+    S1(xi, yi);
+    newton(xi, yi, N);
+    printf("\n");
+
+    S2(xi, yi);
+    newton(xi, yi, N);
+    printf("\n");
+
+    S3(xi, yi);
     newton(xi, yi, N);
 
 }
