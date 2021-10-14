@@ -2,11 +2,12 @@
 #include "tableauTest.c"
 
 double deltaInvers(double tabX[], double tabY[], int i, int k){
-    if (k==1)
+    if (k==1)  { 
         return ((tabY[i-1]-tabY[k-1])/(tabX[i-1]-tabX[k-1]));
+    }   
     else if(k > 1) {
         return ((deltaInvers(tabX, tabY, i, k-1) - deltaInvers(tabX, tabY, k, k-1))/ (tabX[i-1]-tabX[k-1]));
-    } 
+    }  
 } 
 
 void Bi(double tabB[], double tabX[], double tabY[], int N){
@@ -24,17 +25,16 @@ void polynome(double degre[], double tabX[], double tabB[], int N){
     //initialisation tableau degre
     degre[0]=tabB[N-1];
     for (int j = 1; j < N; j++)
-        degre[j]=0; 
-
+        degre[j]=0;
     //remplissage tableau
     for (int j = 1; j < N; j++)
     {
-        for (int t = N-1; t > 0; t--)
-            degre[t] = degre[t-1] - degre[t]*tabX[N-j-1];        
+        for (int t = N-1; t > 0; t--){ 
+            degre[t] = degre[t-1] - degre[t]*tabX[N-j-1]; 
+        }       
         degre[0] = tabB[N-j-1] - degre[0]*(tabX[N-j-1]);
           
     }
-    //degre[N-1] = tabB[N-1];  
     
 } 
 
@@ -57,14 +57,21 @@ void newton(double xi[], double yi[], int N){
 
 int main(){
     
-    //double xi[6] = {-2.0, 1.0, 4.0, -1.0, 3.0, -4.0};
-    //double yi[6] = {-1.0, 2.0, 59.0, 4.0, 24.0, -53.0};
+    //exemple exercice TD
+    double xi[5] = {-1, -0.5, 0, 0.5, 1};
+    double yi[5] = {-1.5, 0, 0.25, 0, 0};
 
-    int N = 21;
-    double xi[N];
-    double yi[N];
+    //exemple cours
+    //double xi[4] = {0, 2, 4, 6};  
+    //double yi[4] = {0, 4, 0, 4};
 
-    depenses(xi, yi);
+    int N = 5;
+
+    //exemple tableaux tests
+    //double xi[N];
+    //double yi[N];
+
+    //depenses(xi, yi);
     newton(xi, yi, N);
 
 }
