@@ -1,8 +1,4 @@
 #include "fichier.h"
-<<<<<<< HEAD
-#include "tableauTest.c"
-=======
->>>>>>> ab4cbb164d1139a4604bd61deaeebd90005435bc
 
 double deltaInvers(double tabX[], double tabY[], int i, int k) {
     if (k == 1)
@@ -45,7 +41,7 @@ void newton(double xi[], double yi[], int N) {
     double degre[N];
     polynome(degre, xi, tabB, N);
 
-    printf("Le polynôme de Newton s'écrit ici sous la forme : \n");
+    puts("Polynôme de Newton :\n");
     for (int j = N - 1; j > 0; j--) {
         printf("(%.5f)x%d", degre[j], j);
         printf(" + ");
@@ -62,26 +58,4 @@ void densiteEauTempN(double* tabx, double* taby) {
         tabx[i] = i * 2;
         taby[i] = tmp[i];
     }
-}
-
-int main(){
-    
-    //exemple exercice TD
-    double xi[5] = {-1, -0.5, 0, 0.5, 1};
-    double yi[5] = {-1.5, 0, 0.25, 0, 0};
-
-    //exemple cours
-    //double xi[4] = {0, 2, 4, 6};  
-    //double yi[4] = {0, 4, 0, 4};
-
-    int N = 5;
-
-    //exemple tableaux tests
-    //double xi[N];
-    //double yi[N];
-
-    //depenses(xi, yi);
-    newton(xi, yi, N);
-
-    newton(xi, yi, N);
 }

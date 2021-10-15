@@ -1,8 +1,5 @@
 #include "fichier.h"
-#ifndef liste_h
-#define liste_h
 #include "fonction.c"
-#endif
 
 double* li(Liste* L, int i) {
     element* e = L->head;
@@ -44,30 +41,4 @@ double* lagrange(Liste* L) {
         }
     }
     return polynome;
-}
-
-int main() {
-    srand(time(NULL));
-    Liste* test = densiteEauTemp();
-    afficheListe(test);
-    puts("");
-    double* resultat = lagrange(test);
-    printf("%gx%d", resultat[test->nb_elements_ - 1], test->nb_elements_ - 1);
-    for (int i = test->nb_elements_ - 2; i >= 0; i--)
-        printf(" + %gx%d", resultat[i], i);
-    puts("\n");
-    double somme = 0;
-    element* e = test->head;
-    for (int i = 0; i < test->nb_elements_; i++) {
-        int a = e->xi;
-        for (int j = 0; j < test->nb_elements_; j++)
-            somme += resultat[j] * powf(a, j);
-        printf("f(%d) = %g et Yi = %g\n", a, somme, e->yi);
-        somme = 0;
-        e = e->next_;
-    }
-
-    free(resultat);
-    freeListe(test);
-    return 0;
 }
