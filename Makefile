@@ -1,3 +1,3 @@
 all:
-	gcc -o main newton.c  -g -Wall -Wpedantic -Wextra -lm
+	gcc -o main lagrange.c  -g -Wall -Wpedantic -Wextra -lm
 	./main

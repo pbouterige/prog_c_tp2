@@ -41,9 +41,9 @@ void afficheListe(Liste* L) {
     printf("[xi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
         if (iterateur->xi >= 0)
-            printf("[  %Lg ]", iterateur->xi);
+            printf("[  %g ]", iterateur->xi);
         else
-            printf("[ %Lg ]", iterateur->xi);
+            printf("[ %g ]", iterateur->xi);
         iterateur = iterateur->next_;
     }
     puts("");
@@ -51,9 +51,9 @@ void afficheListe(Liste* L) {
     printf("[yi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
         if (iterateur->yi >= 0)
-            printf("[  %Lg ]", iterateur->yi);
+            printf("[  %g ]", iterateur->yi);
         else
-            printf("[ %Lg ]", iterateur->yi);
+            printf("[ %g ]", iterateur->yi);
         iterateur = iterateur->next_;
     }
     puts("");
@@ -103,19 +103,19 @@ Liste* TroisSeries() {
         getchar();
         if (choix == 1) {
             Liste* s = ClisteVide();
-            double tmp[10] = {3.1,  4.74, 6.13, 7.26, 8.14, 8.77,
+            double tmp[11] = {3.1,  4.74, 6.13, 7.26, 8.14, 8.77,
                               9.14, 9.26, 9.13, 8.74, 8.1};
             for (int i = 4; i < 15; i++) AElement(s, i, tmp[i]);
             return s;
         } else if (choix == 2) {
             Liste* s = ClisteVide();
-            double tmp[10] = {5.39, 5.73, 6.08, 6.42,  6.77, 7.11,
+            double tmp[11] = {5.39, 5.73, 6.08, 6.42,  6.77, 7.11,
                               7.46, 7.81, 8.15, 12.74, 8.84};
             for (int i = 4; i < 15; i++) AElement(s, i, tmp[i]);
             return s;
         } else if (choix == 3) {
             Liste* s = ClisteVide();
-            double tmp[10] = {6.58, 5.76, 7.71, 8.84, 8.47, 7.04,
+            double tmp[11] = {6.58, 5.76, 7.71, 8.84, 8.47, 7.04,
                               5.25, 12.5, 5.56, 7.91, 6.89};
             for (int i = 0; i < 10; i++) {
                 if (i == 7)

@@ -59,7 +59,7 @@ void depenses(double tabX[], double tabY[]){
 
 void AfficheTab(double tab[], int N){
     for (int i = 0 ; i < N ; i++){
-        printf("%f ", tab[i]);
+        printf("%g ", tab[i]);
     } 
     printf("\n");
 }
