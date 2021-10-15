@@ -1,5 +1,8 @@
 #include "fichier.h"
+<<<<<<< HEAD
 #include "tableauTest.c"
+=======
+>>>>>>> ab4cbb164d1139a4604bd61deaeebd90005435bc
 
 double deltaInvers(double tabX[], double tabY[], int i, int k) {
     if (k == 1)
