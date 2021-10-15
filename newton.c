@@ -1,5 +1,4 @@
 #include "fichier.h"
-#include "fonction.c"
 
 double deltaInvers(double tabX[], double tabY[], int i, int k) {
     if (k == 1)
