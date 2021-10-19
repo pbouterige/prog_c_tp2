@@ -43,10 +43,10 @@ void newton(double xi[], double yi[], int N) {
 
     puts("Polynôme de Newton :\n");
     for (int j = N - 1; j > 0; j--) {
-        printf("(%.5f)x%d", degre[j], j);
+        printf("%.17g*x^%d", degre[j], j);
         printf(" + ");
     }
-    printf("(%.5f)\n", degre[0]);
+    printf("%.17g\n", degre[0]);
 }
 
 void densiteEauTempN(double* tabx, double* taby) {

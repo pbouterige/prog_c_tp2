@@ -1,19 +1,16 @@
 #include "lagrange.c"
 #include "newton.c"
 
-
-
-
 int main() {
     int choix = 0;
     Liste* Final;
-    while (choix != 1 && choix != 2 && choix != 3 && choix != 4){
+    while (choix != 1 && choix != 2 && choix != 3 && choix != 4) {
         puts("\nChoix liste :\n");
         puts("[Densité de l'eau]     [1]");
         puts("[Trois séries]         [2]");
         puts("[Dépense mensuelles]   [3]");
         puts("[Liste personelle]     [4]\n");
-        scanf("%d",&choix);
+        scanf("%d", &choix);
         if (choix == 1)
             Final = densiteEauTemp();
         else if (choix == 2)
@@ -21,35 +18,37 @@ int main() {
         else if (choix == 3)
             Final = depense();
         else if (choix == 4)
-            RemplirL(Final,1);
-        else{
+            RemplirL(Final, 1);
+        else {
             puts("choix incorrect");
-            while (getchar() != '\n'){}
+            while (getchar() != '\n') {
+            }
         }
     }
     choix = -1;
     afficheListe(Final);
-    if (ListeValide(Final)){
-        puts("La liste n'est pas valide; En effet, deux xi ont la même valeur.");
+    if (ListeValide(Final)) {
+        puts(
+            "La liste n'est pas valide; En effet, deux xi ont la même valeur.");
         freeListe(Final);
         return 0;
     }
-    while(choix != 1 && choix != 2 && choix != 3){
+    while (choix != 1 && choix != 2 && choix != 3) {
         puts("\nChoix méthode interpolation :\n");
         puts("[Lagrange]     [1]");
         puts("[Newton]       [2]");
         puts("[Les deux]     [3]\n");
-        scanf("%d",&choix);
+        scanf("%d", &choix);
         bool test = false;
-        if (choix == 3)
-            test =true;
-        if (choix == 1 || test){
+        if (choix == 3) test = true;
+        if (choix == 1 || test) {
             double* resultat = lagrange(Final);
             puts("\nPolynôme de Lagrange :");
             puts("");
-            printf("%fx%d", resultat[Final->nb_elements_ - 1], Final->nb_elements_ - 1);
+            printf("%.17g*x^%d", resultat[Final->nb_elements_ - 1],
+                   Final->nb_elements_ - 1);
             for (int i = Final->nb_elements_ - 2; i >= 0; i--)
-                printf(" + %fx%d", resultat[i], i);
+                printf(" + %.17g*x^%d", resultat[i], i);
             puts("\n");
             // double somme = 0;
             // element* e = Final->head;
@@ -64,17 +63,19 @@ int main() {
             //         puts("");
             // }
             free(resultat);
-        }if (choix == 2 || test){
+        }
+        if (choix == 2 || test) {
             int N = Final->nb_elements_;
-            double * xi = (double*)malloc(N*sizeof(double));
-            double * yi = (double*)malloc(N*sizeof(double));
-            liste_New(Final,xi,yi);
-            newton(xi,yi,N);
+            double* xi = (double*)malloc(N * sizeof(double));
+            double* yi = (double*)malloc(N * sizeof(double));
+            liste_New(Final, xi, yi);
+            newton(xi, yi, N);
             free(xi);
             free(yi);
-        }else if(choix != 1 && choix != 3){
+        } else if (choix != 1 && choix != 3) {
             puts("choix incorrect");
-            while (getchar() != '\n'){}
+            while (getchar() != '\n') {
+            }
         }
     }
     freeListe(Final);
