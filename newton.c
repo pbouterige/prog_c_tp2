@@ -47,6 +47,7 @@ void newton(double xi[], double yi[], int N) {
         printf(" + ");
     }
     printf("%.17g\n", degre[0]);
+    fonction_erreurN(xi, yi, degre, N);
 }
 
 void densiteEauTempN(double* tabx, double* taby) {

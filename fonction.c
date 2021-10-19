@@ -33,29 +33,29 @@ void AElement(Liste* L, double xi, double yi) {
 }
 
 void RemplirL(Liste* L, int i) {
-    if (i == 1){
+    if (i == 1) {
         int taille;
-        double xi,yi;
+        double xi, yi;
         puts("nombre d'éléments ?");
-        scanf("%d",&taille);
+        scanf("%d", &taille);
         for (int i = 0; i < taille; i++) {
-            printf("x%d : ",i+1);
-            scanf("%lf",&xi);
-            printf("y%d : ",i+1);
-            scanf("%lf",&yi);
+            printf("x%d : ", i + 1);
+            scanf("%lf", &xi);
+            printf("y%d : ", i + 1);
+            scanf("%lf", &yi);
             AElement(L, xi, yi);
         }
-    }else
-        for (int j = 0 ; j <i ; j++) AElement(L,0,0);
+    } else
+        for (int j = 0; j < i; j++) AElement(L, 0, 0);
 }
 
 void afficheListe(Liste* L) {
     element* iterateur = L->head;
     printf("[xi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
-        if (iterateur->xi <10)
+        if (iterateur->xi < 10)
             printf("[  %g   ]", iterateur->xi);
-        else if (iterateur->xi <100)
+        else if (iterateur->xi < 100)
             printf("[  %g  ]", iterateur->xi);
         else
             printf("[  %g ]", iterateur->xi);
@@ -65,9 +65,9 @@ void afficheListe(Liste* L) {
     iterateur = L->head;
     printf("[yi] ");
     for (int i = 0; i < L->nb_elements_; i++) {
-        if (iterateur->yi <10)
+        if (iterateur->yi < 10)
             printf("[%.4f]", iterateur->yi);
-        else if (iterateur->yi <100)
+        else if (iterateur->yi < 100)
             printf("[%.3f]", iterateur->yi);
         else
             printf("[%.2f]", iterateur->yi);
@@ -121,13 +121,13 @@ Liste* TroisSeries() {
             Liste* s = ClisteVide();
             double tmp[11] = {3.1,  4.74, 6.13, 7.26, 8.14, 8.77,
                               9.14, 9.26, 9.13, 8.74, 8.1};
-            for (int i = 0; i < 11; i++) AElement(s, i+4, tmp[i]);
+            for (int i = 0; i < 11; i++) AElement(s, i + 4, tmp[i]);
             return s;
         } else if (choix == 2) {
             Liste* s = ClisteVide();
             double tmp[11] = {5.39, 5.73, 6.08, 6.42,  6.77, 7.11,
                               7.46, 7.81, 8.15, 12.74, 8.84};
-            for (int i = 0; i < 11; i++) AElement(s, i+4, tmp[i]);
+            for (int i = 0; i < 11; i++) AElement(s, i + 4, tmp[i]);
             return s;
         } else if (choix == 3) {
             Liste* s = ClisteVide();
@@ -141,31 +141,28 @@ Liste* TroisSeries() {
             }
             return s;
         }
-        while(getchar() != '\n'){}
+        while (getchar() != '\n') {
+        }
         puts("choix non valide\n");
     }
 }
 
-Liste* depense(){
+Liste* depense() {
     Liste* s = ClisteVide();
-    double tmp1[21] = { 752, 855, 871, 734, 610, 582, 921,
-                        492, 569, 462, 907, 643, 862, 524,
-                        679, 902, 918, 828, 875, 809, 894};
-    double tmp2[21] = { 85, 83, 162, 79, 81, 83, 281, 81,
-                        81, 80, 243, 84, 84, 82, 80, 226,
-                        260, 82, 186, 77, 223};
-    for (int i = 0 ; i < 21 ; i++)
-        AElement(s,tmp1[i],tmp2[i]);
+    double tmp1[21] = {752, 855, 871, 734, 610, 582, 921, 492, 569, 462, 907,
+                       643, 862, 524, 679, 902, 918, 828, 875, 809, 894};
+    double tmp2[21] = {85, 83, 162, 79, 81,  83,  281, 81,  81, 80, 243,
+                       84, 84, 82,  80, 226, 260, 82,  186, 77, 223};
+    for (int i = 0; i < 21; i++) AElement(s, tmp1[i], tmp2[i]);
     return s;
 }
 
-bool ListeValide(Liste* l){
+bool ListeValide(Liste* l) {
     element* e1 = l->head;
     element* e2 = l->head;
-    for (int i = 0 ; i <l->nb_elements_ ; i++){
-        for (int j = 0 ; j< l->nb_elements_ ; j++){
-            if (e1->xi == e2->xi && i != j)
-                return true;
+    for (int i = 0; i < l->nb_elements_; i++) {
+        for (int j = 0; j < l->nb_elements_; j++) {
+            if (e1->xi == e2->xi && i != j) return true;
             e2 = e2->next_;
         }
         e2 = l->head;
@@ -174,11 +171,41 @@ bool ListeValide(Liste* l){
     return false;
 }
 
-void liste_New(Liste* l,double* x, double* y){
+void liste_New(Liste* l, double* x, double* y) {
     element* e = l->head;
-    for (int i = 0 ; i < l->nb_elements_ ; i++){
+    for (int i = 0; i < l->nb_elements_; i++) {
         x[i] = e->xi;
         y[i] = e->yi;
         e = e->next_;
     }
+}
+
+void fonction_erreurG(Liste* Final, double* resultat) {
+    double somme = 0, test = 0;
+    element* e = Final->head;
+    for (int i = 0; i < Final->nb_elements_; i++) {
+        int a = e->xi;
+        for (int j = 0; j < Final->nb_elements_; j++)
+            somme += resultat[j] * powf(a, j);
+        test += somme - e->yi;
+        somme = 0;
+        e = e->next_;
+    }
+    test /= Final->nb_elements_;
+    test = fabs(test);
+    printf("\nécart fonction erreur : %g", test);
+}
+
+void fonction_erreurN(double* xi, double* yi, double* resultat, int N) {
+    double somme = 0, test = 0;
+    int a;
+    for (int i = 0; i < N; i++) {
+        a = xi[i];
+        for (int j = 0; j < N; j++) somme += resultat[j] * powf(a, j);
+        test += somme - yi[i];
+        somme = 0;
+    }
+    test /= N;
+    test = fabs(test);
+    printf("écart fonction erreur : %g\n", test);
 }

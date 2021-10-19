@@ -49,19 +49,8 @@ int main() {
                    Final->nb_elements_ - 1);
             for (int i = Final->nb_elements_ - 2; i >= 0; i--)
                 printf(" + %.17g*x^%d", resultat[i], i);
+            fonction_erreurG(Final, resultat);
             puts("\n");
-            // double somme = 0;
-            // element* e = Final->head;
-            // for (int i = 0; i < Final->nb_elements_; i++) {
-            //     int a = e->xi;
-            //     for (int j = 0; j < Final->nb_elements_; j++)
-            //         somme += resultat[j] * powf(a, j);
-            //     printf("f(%d) = %f et Yi = %f   ", a, somme, e->yi);
-            //     somme = 0;
-            //     e = e->next_;
-            //     if (i%2 == 0)
-            //         puts("");
-            // }
             free(resultat);
         }
         if (choix == 2 || test) {
