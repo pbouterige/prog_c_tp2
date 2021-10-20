@@ -185,11 +185,8 @@ void fonction_erreurG(Liste* Final, double* resultat) {
     element* e = Final->head;
     for (int i = 0; i < Final->nb_elements_; i++) {
         int a = e->xi;
-        for (int j = 0; j < Final->nb_elements_; j++) {
+        for (int j = 0; j < Final->nb_elements_; j++)
             somme = somme + resultat[j] * pow(a, j);
-            printf("%g ", somme);
-        }
-        puts("");
         test += somme - e->yi;
         somme = 0;
         e = e->next_;
